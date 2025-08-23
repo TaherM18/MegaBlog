@@ -12,14 +12,15 @@ class AuthService {
         this.account = new Account(this.client);
     };
 
+    //#region createAccount
     async createAccount({email, password, name}) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
-                this.login({email, password});
+                return await this.login({email, password});
             }
             else {
-                return userAccount
+                return null;
             }
         }
         catch (error) {
@@ -28,6 +29,7 @@ class AuthService {
         }
     }
 
+    //#region login
     async login({email, password}) {
         try {
             return await this.account.createEmailPasswordSession(email, password);
@@ -38,6 +40,7 @@ class AuthService {
         }
     }
 
+    //#region getCurrentUser
     async getCurrentUser() {
         try {
             return await this.account.get();
@@ -48,9 +51,10 @@ class AuthService {
         }
     }
 
+    //#region logoutAll
     async logoutAll() {
         try {
-            return await account.deleteSessions();
+            return await this.account.deleteSessions();
         }
         catch (error) {
             console.error("ERROR: auth.service :: logoutAll ::\n",error);

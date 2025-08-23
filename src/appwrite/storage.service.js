@@ -12,6 +12,7 @@ class StorageService {
         this.storage = new Storage(this.client);
     }
 
+    //#region uploadFile
     async uploadFile(file) {
         try {
             return await this.storage.createFile(
@@ -26,6 +27,7 @@ class StorageService {
         }
     }
 
+    //#region deleteFile
     async deleteFile(fileId) {
         try {
             await this.storage.deleteFile(
@@ -40,6 +42,7 @@ class StorageService {
         }
     }
 
+    //#region getFilePreview
     async getFilePreview(fileId) {
         try {
             return await this.storage.getFilePreview(
@@ -54,6 +57,6 @@ class StorageService {
     }
 }
 
-const databaseService = new StorageService();
+const storageService = new StorageService();
 
-export default databaseService;
+export default storageService;

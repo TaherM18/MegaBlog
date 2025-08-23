@@ -12,6 +12,7 @@ class DatabaseService {
         this.databases = new Databases(this.client);
     }
 
+    //#region createPost
     async createPost({ title, content, featuredImage, status, userId, docId }) {
         try {
             return await this.databases.createDocument(
@@ -33,6 +34,7 @@ class DatabaseService {
         }
     }
 
+    //#region updatePost
     async updatePost(docId, { title, content, featuredImage, status }) {
         try {
             return await this.databases.updateDocument(
@@ -53,6 +55,7 @@ class DatabaseService {
         }
     }
 
+    //#region deletePost
     async deletePost(docId) {
         try {
             await this.databases.deleteDocument(
@@ -68,6 +71,7 @@ class DatabaseService {
         }
     }
 
+    //#region getPost
     async getPost(docId) {
         try {
             return await this.databases.getDocument(
@@ -82,6 +86,7 @@ class DatabaseService {
         }
     }
 
+    //#region getAllPost
     async getAllPosts(queries = [ Query.equal("status", articleStatus.active) ]) {
         try {
             return await this.databases.listDocuments(
