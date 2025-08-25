@@ -9,6 +9,7 @@ import Login from "./Login";
 import Register from "./Register";
 import PostCard from "./PostCard";
 import Select from "./Select";
+import RTE from "./RTE";
 
 
 export { 
@@ -23,4 +24,5 @@ export {
     Register,
     Select,
     PostCard,
+    RTE,
 };
