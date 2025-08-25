@@ -14,7 +14,7 @@ export default function Login() {
     const [error, setError] = useState("");
 
     async function submitHandler(data) {
-        console.log("submitHandler data:",data)
+        console.log("login submitHandler data:",data)
         setError("");
         try {
             const session = await authService.login(data);

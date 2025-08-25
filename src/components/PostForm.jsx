@@ -68,6 +68,77 @@ export default function PostForm({ post = null }) {
     }
 
     return (
-        <div>PostForm</div>
+        <form
+            className="flex flex-wrap"
+            onSubmit={handleSubmit(submitHandler)}
+        >
+            <div className="w-1/3 px-2">
+                <Input
+                    label="Title"
+                    placeholder="Enter title"
+                    {...register(
+                        "title", {
+                            required: true,
+                        }
+                    )}
+                />
+                <Input
+                    label="Slug"
+                    placeholder="Slug"
+                    {...register(
+                        "slug", {
+                            required: true,
+                        }
+                    )}
+                    onInput={(e) => {
+                        setValue(
+                            "slug",
+                            slugTransform(e.target.value), {
+                                shouldValidate: true,
+                            }
+                        );
+                    }}
+                />
+                <RTE
+                    label="Content"
+                    name="content"
+                    control={control}
+                    defaultValue={getValues("content")}
+                />
+            </div>
+            <div className="w-1/3 px-2">
+                <Input
+                    label="Featured Image"
+                    type="file"
+                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    {...register(
+                        "featuredImage", {
+                            required: !post,
+                        }
+                    )}
+                />
+                {post && (
+                    <div className="w-full mb-4">
+                        <img
+                            src={storageService.getFilePreview(post.featuredImage)}
+                            alt={post.title}
+                            className="rounded-lg"
+                        />
+                    </div>
+                )}
+                <Select
+                    options={["active", "inactive"]}
+                    label="Status"
+                />
+                {...register(
+                    "status", {
+                        required: true,
+                    }
+                )}
+                <Button>
+                    {post ? "Update" : "Create"}
+                </Button>
+            </div>
+        </form>
     );
 }

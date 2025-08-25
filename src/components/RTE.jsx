@@ -7,7 +7,7 @@ export default function RTE({
     name = "content",
     control,
     label = null,
-    defaultValue,
+    defaultValue="<p>This is the initial content of the editor.</p>",
 }) {
     
     const editorRef = useRef(null);
@@ -29,7 +29,7 @@ export default function RTE({
                     <Editor
                         apiKey='no-api-key'
                         onInit={ (_evt, editor) => editorRef.current = editor }
-                        initialValue="<p>This is the initial content of the editor.</p>"
+                        initialValue={defaultValue}
                         init={{
                             height: 500,
                             menubar: false,
